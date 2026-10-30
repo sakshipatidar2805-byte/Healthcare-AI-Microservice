@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HealthAI — Dashboard</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+</head>
+<body class="dashboard-body">
+
+  <div class="bg-animation">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+  </div>
+
+  <!-- Sidebar -->
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <i class="fas fa-heartbeat pulse-icon"></i>
+      <span>HealthAI</span>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="/dashboard" class="nav-item active">
+        <i class="fas fa-th-large"></i> Overview
+      </a>
+      <a href="/" class="nav-item">
+        <i class="fas fa-stethoscope"></i> New Analysis
+      </a>
+      <a href="#agents" class="nav-item">
+        <i class="fas fa-robot"></i> Agents
+      </a>
+      <a href="#architecture" class="nav-item">
+        <i class="fas fa-project-diagram"></i> Architecture
+      </a>
+    </nav>
+    <div class="sidebar-footer">
+      <div class="api-status" id="apiStatus">
+        <span class="status-dot"></span>
+        <span>Checking API...</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Content -->
+  <main class="dashboard-main">
+    <header class="dash-header">
+      <div>
+        <h1>System Dashboard</h1>
+        <p>Healthcare AI Microservice — Real-time Overview</p>
+      </div>
+      <a href="/" class="btn-analyze" style="text-decoration:none; padding: 12px 24px; font-size:0.9rem;">
+        <i class="fas fa-plus"></i> New Analysis
+      </a>
+    </header>
+
+    <!-- Stats Cards -->
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+          <i class="fas fa-robot"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">4</span>
+          <span class="stat-label">AI Agents</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+          <i class="fas fa-project-diagram"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">LangGraph</span>
+          <span class="stat-label">Orchestration</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+          <i class="fas fa-brain"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">Gemini</span>
+          <span class="stat-label">LLM Engine</span>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon" style="background: linear-gradient(135deg, #43e97b, #38f9d7);">
+          <i class="fas fa-database"></i>
+        </div>
+        <div class="stat-info">
+          <span class="stat-value">FAISS</span>
+          <span class="stat-label">Vector DB</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Agent Pipeline Visualization -->
+    <section class="dash-section" id="agents">
+      <h2><i class="fas fa-robot"></i> Agent Pipeline</h2>
+      <div class="pipeline">
+        <div class="pipeline-node input-node">
+          <i class="fas fa-user"></i>
+          <span>User Input</span>
+          <small>Symptoms + Patient Info</small>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="arrow-line"></div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="pipeline-node agent-node researcher-node">
+          <i class="fas fa-microscope"></i>
+          <span>Researcher</span>
+          <small>Symptom Analysis</small>
+          <div class="node-badge">Agent 1</div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="arrow-line"></div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="pipeline-node agent-node planner-node">
+          <i class="fas fa-clipboard-list"></i>
+          <span>Planner</span>
+          <small>Treatment Plan</small>
+          <div class="node-badge">Agent 2</div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="arrow-line"></div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="pipeline-node agent-node scheduler-node">
+          <i class="fas fa-calendar-check"></i>
+          <span>Scheduler</span>
+          <small>Follow-up Plan</small>
+          <div class="node-badge">Agent 3</div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="arrow-line"></div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="pipeline-node agent-node summarizer-node">
+          <i class="fas fa-file-medical"></i>
+          <span>Summarizer</span>
+          <small>Final Report</small>
+          <div class="node-badge">Agent 4</div>
+        </div>
+        <div class="pipeline-arrow">
+          <div class="arrow-line"></div>
+          <i class="fas fa-chevron-right"></i>
+        </div>
+        <div class="pipeline-node output-node">
+          <i class="fas fa-file-medical-alt"></i>
+          <span>Health Report</span>
+          <small>Structured Output</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- Agent Details -->
+    <section class="dash-section">
+      <h2><i class="fas fa-info-circle"></i> Agent Details</h2>
+      <div class="agent-cards-grid">
+        <div class="agent-detail-card">
+          <div class="agent-header researcher-header">
+            <i class="fas fa-microscope"></i>
+            <h3>Researcher Agent</h3>
+          </div>
+          <div class="agent-body">
+            <p>Analyzes reported symptoms and identifies possible medical conditions using Gemini AI.</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Symptom pattern recognition</li>
+              <li><i class="fas fa-check"></i> Differential diagnosis</li>
+              <li><i class="fas fa-check"></i> Red flag detection</li>
+              <li><i class="fas fa-check"></i> Diagnostic considerations</li>
+            </ul>
+            <div class="agent-tech">
+              <span class="tech-tag">Gemini 1.5 Flash</span>
+              <span class="tech-tag">Temp: 0.3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-detail-card">
+          <div class="agent-header planner-header">
+            <i class="fas fa-clipboard-list"></i>
+            <h3>Planner Agent</h3>
+          </div>
+          <div class="agent-body">
+            <p>Creates a comprehensive treatment and care plan based on research findings.</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Immediate action steps</li>
+              <li><i class="fas fa-check"></i> Treatment recommendations</li>
+              <li><i class="fas fa-check"></i> Lifestyle modifications</li>
+              <li><i class="fas fa-check"></i> Home care guidance</li>
+            </ul>
+            <div class="agent-tech">
+              <span class="tech-tag">Gemini 1.5 Flash</span>
+              <span class="tech-tag">Temp: 0.4</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-detail-card">
+          <div class="agent-header scheduler-header">
+            <i class="fas fa-calendar-check"></i>
+            <h3>Scheduler Agent</h3>
+          </div>
+          <div class="agent-body">
+            <p>Builds a realistic follow-up schedule with specialist referrals and monitoring plans.</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Day-by-day schedule</li>
+              <li><i class="fas fa-check"></i> Specialist referrals</li>
+              <li><i class="fas fa-check"></i> Test recommendations</li>
+              <li><i class="fas fa-check"></i> Monitoring checklist</li>
+            </ul>
+            <div class="agent-tech">
+              <span class="tech-tag">Gemini 1.5 Flash</span>
+              <span class="tech-tag">Temp: 0.3</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="agent-detail-card">
+          <div class="agent-header summarizer-header">
+            <i class="fas fa-file-medical"></i>
+            <h3>Summarizer Agent</h3>
+          </div>
+          <div class="agent-body">
+            <p>Compiles all agent outputs into a structured, professional patient summary report.</p>
+            <ul>
+              <li><i class="fas fa-check"></i> Executive summary</li>
+              <li><i class="fas fa-check"></i> Priority action list</li>
+              <li><i class="fas fa-check"></i> Complete care overview</li>
+              <li><i class="fas fa-check"></i> Professional formatting</li>
+            </ul>
+            <div class="agent-tech">
+              <span class="tech-tag">Gemini 1.5 Flash</span>
+              <span class="tech-tag">Temp: 0.2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="dash-section" id="architecture">
+      <h2><i class="fas fa-layer-group"></i> Technology Stack</h2>
+      <div class="tech-stack-grid">
+        <div class="tech-layer">
+          <div class="layer-label">Frontend</div>
+          <div class="tech-items">
+            <div class="tech-item"><i class="fab fa-html5"></i> HTML5</div>
+            <div class="tech-item"><i class="fab fa-css3-alt"></i> CSS3</div>
+            <div class="tech-item"><i class="fab fa-js"></i> JavaScript</div>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">Backend</div>
+          <div class="tech-items">
+            <div class="tech-item"><i class="fab fa-python"></i> Python</div>
+            <div class="tech-item"><i class="fas fa-flask"></i> Flask</div>
+            <div class="tech-item"><i class="fas fa-server"></i> Gunicorn</div>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">AI / ML</div>
+          <div class="tech-items">
+            <div class="tech-item"><i class="fas fa-brain"></i> Gemini AI</div>
+            <div class="tech-item"><i class="fas fa-project-diagram"></i> LangGraph</div>
+            <div class="tech-item"><i class="fas fa-link"></i> LangChain</div>
+            <div class="tech-item"><i class="fas fa-database"></i> FAISS</div>
+          </div>
+        </div>
+        <div class="tech-layer">
+          <div class="layer-label">Deployment</div>
+          <div class="tech-items">
+            <div class="tech-item"><i class="fab fa-docker"></i> Docker</div>
+            <div class="tech-item"><i class="fas fa-cubes"></i> Docker Compose</div>
+            <div class="tech-item"><i class="fab fa-aws"></i> AWS EC2</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <script>
+    // Check API health
+    fetch('/api/health')
+      .then(r => r.json())
+      .then(data => {
+        const el = document.getElementById('apiStatus');
+        el.innerHTML = '<span class="status-dot online"></span><span>API Online</span>';
+      })
+      .catch(() => {
+        const el = document.getElementById('apiStatus');
+        el.innerHTML = '<span class="status-dot offline"></span><span>API Offline</span>';
+      });
+  </script>
+</body>
+</html>

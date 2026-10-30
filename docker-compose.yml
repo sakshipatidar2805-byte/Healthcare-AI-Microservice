@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  healthcare-ai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: healthcare-ai-app
+    ports:
+      - "5000:5000"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - FLASK_ENV=${FLASK_ENV:-production}
+    env_file:
+      - .env
+    volumes:
+      - ./app:/app/app   # hot-reload in dev
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:5000/api/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+networks:
+  default:
+    name: healthcare-network
