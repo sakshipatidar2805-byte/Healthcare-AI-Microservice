@@ -9,7 +9,7 @@ def create_app():
     app = Flask(__name__, template_folder="templates", static_folder="static")
     CORS(app)
 
-    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY", "healthcare-ai-secret-2024")
+    app.config["SECRET_KEY"] = os.getenv("SECRET_KEY")
     app.config["GOOGLE_API_KEY"] = os.getenv("GOOGLE_API_KEY", "")
 
     from app.routes.main import main_bp
