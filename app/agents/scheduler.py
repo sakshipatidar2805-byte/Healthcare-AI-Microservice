@@ -37,7 +37,7 @@ Make the schedule realistic and actionable. Include specific timeframes.
 def scheduler_agent(state: HealthcareState) -> HealthcareState:
     """Scheduler agent that creates a follow-up and appointment schedule."""
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0.3,
     )

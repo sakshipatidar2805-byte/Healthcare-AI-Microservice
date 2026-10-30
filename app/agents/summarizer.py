@@ -38,7 +38,7 @@ End with a clear disclaimer that this is AI-generated guidance and not a substit
 def summarizer_agent(state: HealthcareState) -> HealthcareState:
     """Summarizer agent that compiles all outputs into a final patient report."""
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0.2,
     )

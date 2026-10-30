@@ -32,7 +32,7 @@ Be thorough but use clear, understandable language. Always recommend consulting 
 def researcher_agent(state: HealthcareState) -> HealthcareState:
     """Research agent that analyzes symptoms and identifies possible conditions."""
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0.3,
     )

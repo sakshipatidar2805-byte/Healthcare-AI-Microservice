@@ -36,7 +36,7 @@ Keep recommendations practical, safe, and evidence-based. Always emphasize profe
 def planner_agent(state: HealthcareState) -> HealthcareState:
     """Planner agent that creates a treatment and care plan."""
     llm = ChatGoogleGenerativeAI(
-        model="gemini-2.5-flash",
+        model="gemini-3.8-flash",
         google_api_key=os.getenv("GOOGLE_API_KEY"),
         temperature=0.4,
     )
